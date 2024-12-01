@@ -1,25 +1,30 @@
 import "./App.css";
-import { Summary } from "./components/SummaryItem/SummaryItem";
 import data from "../data.json";
+import Layout from "./components/Layout/Layout";
+import { ResultsSummary } from "./components/ResultsSummary/ResultsSummary";
+import { Results } from "./components/Results/Results";
+import SummaryList from "./components/SummaryList/SummaryList";
 function App() {
-  const summary = data.map((item) => {
-    return (
-      <Summary key={item.id}>
-        <Summary.Icon>{item.icon}</Summary.Icon>
-        <Summary.Title>{item.category}</Summary.Title>
-        <>
-          <Summary.Count>{item.score}</Summary.Count> /{" "}
-          <Summary.TotalCount>{100}</Summary.TotalCount>
-        </>
-      </Summary>
-    );
-  });
-
   return (
-    <>
-      <Summary.Title>Summary</Summary.Title>
-      {summary}
-    </>
+    <Results>
+      <Layout className={"gridFlow"} data-scpacing="large">
+        <ResultsSummary.Title>Your Results</ResultsSummary.Title>
+        <Results.Score>
+          <span>76</span> of 100
+        </Results.Score>
+        <Results.Rank
+          rank={"Great"}
+          text={
+            "Your performance exceed 65% of the people conducting the test here!"
+          }
+        />
+      </Layout>
+      <Layout data-spacing="large">
+        <ResultsSummary.Title>Summary</ResultsSummary.Title>
+        <SummaryList data={data} />
+        <ResultsSummary.Button>Continue</ResultsSummary.Button>
+      </Layout>
+    </Results>
   );
 }
 
